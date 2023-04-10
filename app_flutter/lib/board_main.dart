@@ -28,12 +28,13 @@ class Board_main extends StatelessWidget {
                       ),
                       Flexible(flex: 3, child: Container()),
                     ],
-                  ),flex: 1,
+                  ),
+                flex: 1,
               ),
 
               //내가 작성한 글, 댓글 + 즐겨찾기 + 핫게
               Flexible(
-                flex: 4,
+                flex: 5,
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 3),
@@ -119,35 +120,18 @@ class Board_main extends StatelessWidget {
               //픽 게시판 목록
               //내가 작성한 글, 댓글 + 즐겨찾기 + 핫게
               Flexible(
-                flex: 4,
+                flex: 6,
                 child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 3),
                         borderRadius: BorderRadius.circular(15)),
 
-                    child: Container(
-                        child: ListView(
-                          children: [
-                            ListTile(
-                              leading: Image.asset('images/icons8-add-new-50.png', width: 50, height: 50,),
-                              title: Text('FrontEnd'),
-                            ),
-                            ListTile(
-                              leading: Image.asset('images/icons8-add-new-50.png', width: 50, height: 50,),
-                              title: Text('BackEnd'),
-                            ),
-                            ListTile(
-                              leading: Image.asset('images/icons8-add-new-50.png', width: 50, height: 50,),
-                              title: Text('A.I'),
-                            ),
-                            ListTile(
-                              leading: Image.asset('images/icons8-add-new-50.png', width: 50, height: 50,),
-                              title: Text('Image Processing'),
-                            ),
-
-                          ],
-                        )
-                      ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Container(
+                          child: ListViewPage()
+                        ),
+                    ),
                     )
                 ),
               //하단 네비게이션 바
@@ -159,6 +143,51 @@ class Board_main extends StatelessWidget {
           )
         )
       )
+    );
+  }
+}
+
+class ListViewPage extends StatefulWidget {
+  const ListViewPage({Key? key}) : super(key: key);
+
+  @override
+  State<ListViewPage> createState() => _ListViewPageState();
+}
+
+class _ListViewPageState extends State<ListViewPage> {
+  //서버에서 가져올 분야 리스트
+  var Field = [
+    'FrontEnd',
+    'BackEnd',
+    'A.I',
+    'IamgeProcessing'
+  ];
+
+  var imageList = [
+    'images/icons8-add-new-50.png'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: Field.length,
+          itemBuilder: (context, index){
+            return Row(
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: Image.asset(imageList[0]),
+                    ),
+
+                    SizedBox(width: 10,),
+
+                    Text(Field[index], style: TextStyle(fontSize:  22, fontWeight: FontWeight.bold, color: Colors.black),)
+                  ],
+              );
+          },
+      ),
     );
   }
 }
