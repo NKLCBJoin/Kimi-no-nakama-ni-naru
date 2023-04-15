@@ -37,6 +37,12 @@ www.유튭링크.com
 | 12/03  | https://drive.google.com/file/d/16PjndHggVrUTI_B44diIYVI9XwrhlWWr/view?usp=share_link
 
 
+## 🖥 UI설계
+![board_main](https://user-images.githubusercontent.com/60930743/232194901-d6642848-8d74-47e3-a073-132d73797448.png)
+![board_my](https://user-images.githubusercontent.com/60930743/232194905-2f04bec1-3f9f-4f5a-814e-4270a16fb8e6.png)
+![alram and settings](https://user-images.githubusercontent.com/60930743/232194920-ed670d20-61c2-4536-b5ee-8448408f2b43.png)
+
+
 
 ## 👨🏽‍💻 Workspace
 <img alt="Macbook Air M1" src="https://img.shields.io/badge/Apple-MacBook_PRO_-999999?style=for-the-badge&logo=apple&logoColor=white"> <img alt="Macbook Air M1" src="https://img.shields.io/badge/Windows-111111?style=for-the-badge&logo=Windows&logoColor=0078D6">
