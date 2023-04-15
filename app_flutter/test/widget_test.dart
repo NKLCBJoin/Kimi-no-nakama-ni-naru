@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:you_my_colleague/board_main.dart';
+import 'package:you_my_colleague/View/board_main.dart';
 import 'package:you_my_colleague/main.dart';
 
 void main() {
