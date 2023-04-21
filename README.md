@@ -26,15 +26,14 @@ www.유튭링크.com
 ## 🐾  우리들의 발자취
 
 ![image](https://user-images.githubusercontent.com/114370871/206493394-ada1644d-4667-4c93-b29f-57c912d02069.png)
-2022년 09월 14일 ~ 2022년 12월 6일
+2023년 03월 06일 ~ 2022년 6월 1일
 #### 💬 회의 일지
 | Name | Description |
 | --- | --- |
-| 9/21  | [https://drive.google.com/file/d/1R_pHI_uLByWQDm7TNLmBx3bMZl9fksrh/view?usp=share_link](https://drive.google.com/file/d/1R_pHI_uLByWQDm7TNLmBx3bMZl9fksrh/view?usp=share_link)|
-| 9/25  | https://drive.google.com/file/d/1YWuOiLjxcmKl4KN10eHR3ixIMmd883qi/view?usp=share_link|
-| 10/10  | https://drive.google.com/file/d/1YWuOiLjxcmKl4KN10eHR3ixIMmd883qi/view?usp=share_link|
-| 11/05  | https://drive.google.com/file/d/1DBWKmq2Ls6QGyV8eJ_tMIjyIGNa9ZMkC/view?usp=share_link
-| 12/03  | https://drive.google.com/file/d/16PjndHggVrUTI_B44diIYVI9XwrhlWWr/view?usp=share_link
+| 3/2  | [https://www.notion.so/066a35caa56a4b77bb373a75236b57e5?pvs=4](https://drive.google.com/file/d/1R_pHI_uLByWQDm7TNLmBx3bMZl9fksrh/view?usp=share_link)|
+| 4/1  | https://www.notion.so/2-262b5b579d034398b4ecf6726457eea6?pvs=4|
+| 4/15  | https://www.notion.so/3-ae9072201edf4c1dbbb50b0d8f7e99df?pvs=4|
+
 
 
 ## 🖥 UI설계
