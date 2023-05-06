@@ -7,48 +7,19 @@ import 'package:you_my_colleague/View/board_my_favorites.dart';
 import 'package:you_my_colleague/View/board_my_write.dart';
 import 'package:you_my_colleague/View/board_request_newboard.dart';
 import 'package:you_my_colleague/View/settings.dart';
+import 'package:you_my_colleague/View/homepage.dart';
 
 class Board_main extends StatefulWidget {
-  const Board_main({Key? key}) : super(key: key);
-
   @override
   State<Board_main> createState() => _Board_mainState();
 }
 
 class _Board_mainState extends State<Board_main> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _selectedIndex,
-              onTap: _onItemTapped,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              type: BottomNavigationBarType.fixed,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'd',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.dashboard),
-                  label: 'd',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.notifications_active),
-                  label: 'd',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: 'd',
-                ),
-
-              ],
-            ),
             body: Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
                     //SizedBox(height: 10,),
@@ -266,30 +237,6 @@ class _Board_mainState extends State<Board_main> {
                 )
             )
     );
-  }
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch(index) {
-      case 0:
-      // 홈 화면으로 이동
-        break;
-      case 1:
-      // 대시보드 화면으로 이동
-        break;
-      case 2:
-      // 알림 화면으로 이동
-        break;
-      case 3:
-      // 설정 화면으로 이동
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SettingPage()),
-        );
-        break;
-    }
   }
 }
 
