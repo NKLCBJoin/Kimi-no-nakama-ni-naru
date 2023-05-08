@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:you_my_colleague/View/alarm.dart';
 import 'package:you_my_colleague/View/board_main.dart';
+import 'package:you_my_colleague/View/homepage.dart';
 import 'package:you_my_colleague/View/settings.dart';
 import 'package:you_my_colleague/View/test.dart';
 
@@ -15,7 +16,7 @@ class bottomNav extends StatefulWidget {
 class _bottomNavState extends State<bottomNav> {
   int _selectedIndex = 0;
   final List<Widget> _children = <Widget>[
-    testPage(),
+    HomePage2(),
     Board_main(),
     alarmPage(),
     SettingPage(),
