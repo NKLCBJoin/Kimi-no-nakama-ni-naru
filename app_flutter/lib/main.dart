@@ -3,6 +3,7 @@ import 'package:you_my_colleague/View/StartPage.dart';
 import 'package:you_my_colleague/View/homepage.dart';
 import 'View/board_main.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:you_my_colleague/View/common_UI/bottomNav.dart';
 
 void main() {
   KakaoSdk.init(nativeAppKey: '37ebe54921c4c2981a2398e39c0cef16', javaScriptAppKey: '08e9877e4fbca0291d56d655e4cdcd88');
@@ -19,6 +20,23 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue
       ),
       home: const StartPage(),
+    );
+  }
+}
+class Yamc extends StatefulWidget {
+  const Yamc({Key? key}) : super(key: key);
+
+  @override
+  State<Yamc> createState() => _YamcState();
+}
+
+class _YamcState extends State<Yamc> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        //bottomNav에서 페이지 선택함
+        home: bottomNav()
     );
   }
 }

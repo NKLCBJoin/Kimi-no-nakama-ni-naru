@@ -27,7 +27,7 @@ class _board_request_newboardState extends State<board_request_newboard> {
                               onPressed: (){
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const Board_main())
+                                    MaterialPageRoute(builder: (context) => Board_main())
                                 );
                               }, child: Container(child: Text('게시판',style: TextStyle(fontSize: 22, color: const Color(0xffB5B5B5)),)),
                             ),
