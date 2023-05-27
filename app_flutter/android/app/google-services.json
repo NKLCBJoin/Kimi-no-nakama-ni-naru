@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689279721841",
+    "project_id": "dreamcomunity-5e670",
+    "storage_bucket": "dreamcomunity-5e670.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689279721841:android:a694335d7f30f8a2aed6d0",
+        "android_client_info": {
+          "package_name": "com.example.you_my_colleague"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxlinfBc_TTJeZarKhJAG4iD4BLqVxl2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

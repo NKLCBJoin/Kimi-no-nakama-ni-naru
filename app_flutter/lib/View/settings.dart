@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:you_my_colleague/View/StartPage.dart';
+
+import '../Kakao/kakao_login.dart';
+import '../Kakao/main_model.dart';
 
 class SettingPage extends StatefulWidget {
+
+
   @override
   _SettingPageState createState() => _SettingPageState();
 }
 
 class _SettingPageState extends State<SettingPage> {
+  final viewModel = MainModel(KakaoLogin());
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -93,9 +101,28 @@ class _SettingPageState extends State<SettingPage> {
                             height: 45,
                           ),
                           SizedBox(width:30),
-                          Text('로그아웃', style: TextStyle(fontSize: 20, color: Colors.black),)
+                          InkWell(
+                              child: viewModel.isLogined ? Text('로그아웃', style: TextStyle(fontSize: 20, color: Colors.black),): Text('로그인', style: TextStyle(fontSize: 20, color: Colors.black),),
+                              onTap: () async{
+                                if(viewModel.isLogined)
+                                  {
+                                    await viewModel.logout();
+                                    setState(() {
+                                      Navigator.of(context).pop();
+                                    });
+                                  }
+                                else
+                                  {
+                                    await viewModel.login();
+                                    setState(() {
+
+                                    });
+                                  }
+                              }
+                          ),
                         ],
                       ),
+                      Text("${viewModel.isLogined}")
                     ],
                   )
                 ),

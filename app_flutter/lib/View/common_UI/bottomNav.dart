@@ -8,7 +8,8 @@ import 'package:you_my_colleague/View/test.dart';
 //신근재
 class bottomNav extends StatefulWidget {
   const bottomNav({Key? key}) : super(key: key);
-
+  // bottomNav({this.parseLoginData});
+  // final dynamic parseLoginData;
   @override
   State<bottomNav> createState() => _bottomNavState();
 }

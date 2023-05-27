@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:you_my_colleague/View/StartPage.dart';
-import 'package:you_my_colleague/View/homepage.dart';
-import 'View/board_main.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:you_my_colleague/View/common_UI/bottomNav.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
   KakaoSdk.init(nativeAppKey: '37ebe54921c4c2981a2398e39c0cef16', javaScriptAppKey: '08e9877e4fbca0291d56d655e4cdcd88');
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {

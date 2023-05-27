@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:you_my_colleague/View/common_UI/bottomNav.dart';
 import '../Kakao/kakao_login.dart';
 import '../Kakao/main_model.dart';
-import '../board_main.dart';
+
 
 
 class StartPage extends StatefulWidget {
@@ -45,11 +46,10 @@ class _StartPageState extends State<StartPage> {
                             child: Image.asset('images/kakao_login_medium_narrow.png',width: 200,height: 50, fit: BoxFit.cover,),
                             onTap: () async{
                               await viewModel.login();
-                              setState(() {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                                    return Board_main(
-                                    );
-                                  }));
+                              setState(() async{
+                                     await Navigator.push(context, MaterialPageRoute(builder: (context){
+                                      return bottomNav();
+                                    }));
                               });
                             }
                         ),
