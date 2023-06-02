@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:you_my_colleague/View/board_1.dart';
 import 'package:you_my_colleague/View/board_hot_board.dart';
 import 'package:you_my_colleague/View/board_my_comment.dart';
 import 'package:you_my_colleague/View/board_my_favorites.dart';
@@ -249,15 +251,8 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
+  bool showSpinner = false;
   //서버에서 가져올 분야 리스트
-  var Field = [
-    'FrontEnd',
-    'BackEnd',
-    'A.I',
-    'IamgeProcessing',
-    'UI/UX설계',
-    'PM'
-  ];
 
   var imageList = [
     'images/icons8-add-new-50.png'
@@ -266,30 +261,67 @@ class _ListViewPageState extends State<ListViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: Field.length,
-          itemBuilder: (context, index){
-            return GestureDetector(
-              onTap: (){
-
-              },
-
-              child: Row(
-                    children: [
-                      SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: Image.asset(imageList[0]),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Text(Field[index], style: TextStyle(fontSize:  22, fontWeight: FontWeight.bold, color: Colors.black),)
-                    ],
-                ),
-            );
-          },
-      ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('post/ZQGCDA86AjRHWF7dvJAO/게시판신청')
+        .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if(snapshot.connectionState==ConnectionState.waiting)
+            {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          final docs = snapshot.data!.docs;
+          return ListView.builder(
+            itemCount: docs.length,
+            itemBuilder: (context, index){
+              return GestureDetector(
+                onTap: ()
+                {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const board1())
+                  );
+                },
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: Image.asset(imageList[0]),
+                    ),
+                    Text(docs[index]['분야'], style: TextStyle(fontSize:  22, fontWeight: FontWeight.bold, color: Colors.black),),
+                  ],
+                )
+              );
+            }
+          );
+        },
+      )
+      // body: ListView.builder(
+      //     itemCount: Field.length,
+      //     itemBuilder: (context, index){
+      //       return GestureDetector(
+      //         onTap: (){
+      //
+      //         },
+      //
+      //         child: Row(
+      //               children: [
+      //                 SizedBox(
+      //                   width: 80,
+      //                   height: 80,
+      //                   child: Image.asset(imageList[0]),
+      //                 ),
+      //
+      //                 SizedBox(width: 10,),
+      //
+      //                 Text(Field[index], style: TextStyle(fontSize:  22, fontWeight: FontWeight.bold, color: Colors.black),)
+      //               ],
+      //           ),
+      //       );
+      //     },
+      // ),
     );
   }
 }

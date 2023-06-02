@@ -23,8 +23,13 @@ class _board_my_favoritesState extends State<board_my_favorites> {
                     Row(
                       children: [
                         Flexible(
-                            flex: 1,
-                            child: Image.asset('images/icons8-less-than-30.png', width: 35, height: 35,)
+                              flex: 1,
+                              child: InkWell(
+                              onTap: () {
+                              Navigator.of(context).pop();
+                              },
+                              child: Image.asset('images/icons8-less-than-30.png', width: 35, height: 35,)
+                              ),
                         ),
                         SizedBox(width: 60,),
                         

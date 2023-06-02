@@ -1,9 +1,14 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:you_my_colleague/View/alarm.dart';
 import 'package:you_my_colleague/View/board_main.dart';
 import 'package:you_my_colleague/View/homepage.dart';
 import 'package:you_my_colleague/View/settings.dart';
 import 'package:you_my_colleague/View/test.dart';
+
+import '../board_1.dart';
+
 
 //신근재
 class bottomNav extends StatefulWidget {
@@ -19,6 +24,7 @@ class _bottomNavState extends State<bottomNav> {
   final List<Widget> _children = <Widget>[
     HomePage2(),
     Board_main(),
+    board1(),
     alarmPage(),
     SettingPage(),
   ];
@@ -41,6 +47,10 @@ class _bottomNavState extends State<bottomNav> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.dashboard),
+              label: 'no',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard_outlined),
               label: 'no',
             ),
             BottomNavigationBarItem(

@@ -25,8 +25,18 @@ class _board_my_commentState extends State<board_my_comment> {
                         SizedBox(height: 20,),
                         Flexible(
                             flex: 1,
-                            child: Image.asset('images/icons8-less-than-30.png', width: 35, height: 35,)
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Image.asset(
+                                'images/icons8-less-than-30.png',
+                                width: 35,
+                                height: 35,
+                              ),
+                            )
                         ),
+
 
                         Flexible(flex: 1, child: SizedBox(width: 100,)),
 
