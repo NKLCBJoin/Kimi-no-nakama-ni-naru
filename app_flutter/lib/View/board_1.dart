@@ -3,17 +3,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:you_my_colleague/View/board_new.dart';
 
+import 'board.dart';
+
 class board1 extends StatefulWidget {
   const board1({Key? key}) : super(key: key);
 
   @override
   State<board1> createState() => _board1State();
 }
-
+// 통합게시판
 class _board1State extends State<board1> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: EmptyAppBar(),
           body: Padding(
@@ -94,7 +97,7 @@ class _ListViewPageState extends State<ListViewPage> {
     return Scaffold(
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-          .collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
+          .collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').orderBy('timestamp',descending: true)
           .snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if(snapshot.connectionState==ConnectionState.waiting)
@@ -111,30 +114,50 @@ class _ListViewPageState extends State<ListViewPage> {
               String date = docs[index]['date'];
               String description = docs[index]['description'];
               String board = docs[index]['board'];
+              String id = docs[index].id;
 
-              return GestureDetector(
-                  onTap: () {
-
-                  },
-
-                  child:
-                  Container(
+              return Container(
+                child: Flexible(
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context){
+                            return Board(parseTitle : title, parseBoard : board,
+                                parseDate : date, parseDescription : description, parseId: id);
+                      })
+                      );
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
                           Row(mainAxisAlignment: MainAxisAlignment.end,children: [Text(date, style: TextStyle(fontSize:  15, color: Colors.grey,),)]),
-                          Row(mainAxisAlignment: MainAxisAlignment.start,children: [Text(title, style: TextStyle(fontSize:  23, fontWeight: FontWeight.bold, color: Colors.black,),)]),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,children: [Flexible(
+                              child: Text(title,
+                                style: TextStyle(fontSize:  23, overflow:TextOverflow.ellipsis,fontWeight: FontWeight.bold, color: Colors.black,
+                                ),
+                                maxLines: 1,),//1줄까지 보여주기
+                          )]),
                           SizedBox(height: 10,),
-                          Row(mainAxisAlignment: MainAxisAlignment.start,children: [Text(description, style: TextStyle(fontSize:  15, fontWeight: FontWeight.bold, color: Colors.grey,),)]),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,
+                              children: [Flexible(
+                                child: Text(description,
+                                  style: TextStyle(fontSize:  15,overflow: TextOverflow.ellipsis, fontWeight: FontWeight.bold, color: Colors.grey,
+                                  ),
+                                maxLines: 1,),//1줄까지 보여주기
+                              )]),
                           SizedBox(height: 15,),
-                          Row(mainAxisAlignment: MainAxisAlignment.start,children: [Text(board, style: TextStyle(fontSize:  15, fontWeight: FontWeight.bold, color: Colors.grey,),)]),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,children: [
+                            Text(board, style: TextStyle(fontSize:  15, fontWeight: FontWeight.bold, color: Colors.grey,),),
+                            ]
+                          ),
                           SizedBox(height: 15,),
                           Container(width: 1000, height: 2, decoration: BoxDecoration(color: Colors.black54),),
                         ],
                       ),
                     ),
-                  )
+                  ),
+                ),
               );
             },
           );

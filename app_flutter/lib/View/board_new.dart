@@ -10,11 +10,8 @@ class boardNew extends StatefulWidget {
   @override
   State<boardNew> createState() => _boardNewState();
 }
-
-
-
 class _boardNewState extends State<boardNew> {
-  final _valueList = ['인공지능 게시판', '백엔드 게시판', '프론트엔드 게시판'];
+  final _valueList = ['자유 게시판','인공지능 게시판', '백엔드 게시판', '프론트엔드 게시판'];
   var _selectValue = '인공지능 게시판';
   late TextEditingController _controller;
   late TextEditingController _controller2;
@@ -36,7 +33,9 @@ class _boardNewState extends State<boardNew> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
+          resizeToAvoidBottomInset:false,
           appBar: EmptyAppBar(),
           body: Padding(
               padding: EdgeInsets.all(5.0),
@@ -44,7 +43,6 @@ class _boardNewState extends State<boardNew> {
                 child: Column(
                   children: [
                     SizedBox(height: 15,),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -71,8 +69,12 @@ class _boardNewState extends State<boardNew> {
                               onTap: () {
                                 FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
                                     .add({'title': '${inputTitle}', 'date': '${inputDate}',
-                                  'description': '${inputContent}', 'board':'${inputBoard}'});
+                                  'description': '${inputContent}', 'board':'${inputBoard}', 'timestamp': FieldValue.serverTimestamp()});
+                                String id = FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').id;
                                 setState(() {
+                                  FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
+                                      .add({'c_name': '', 'c_date': '',
+                                    'c_content': '',  'timestamp':''});
                                   Navigator.pop(context);
                                 });
                               },
@@ -111,8 +113,7 @@ class _boardNewState extends State<boardNew> {
                         ),
                     ),
                     SizedBox(height: 20,),
-                    SizedBox(
-                      height: 50,
+                    SingleChildScrollView(
                       child: Flexible(
                         child: Column(
                           children: [
@@ -122,15 +123,11 @@ class _boardNewState extends State<boardNew> {
                                     inputTitle = text;
                                 });
                               },
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(RegExp(r'[a-z|A-Z|0-9|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|ᆞ|ᆢ|ᄀᆞ|ᄂᆞ|ᄃᆞ|ᄅᆞ|ᄆᆞ|ᄇᆞ|ᄉᆞ|ᄋᆞ|ᄌᆞ|ᄎᆞ|ᄏᆞ|ᄐᆞ|ᄑᆞ|ᄒᆞ]')),
-                              ],
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               controller: _controller,
                               decoration: InputDecoration(
                                   labelText: '제목 입력하세요',
-                                  hintText: '???',  //글자를 입력하면 사라진다.
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.all(3)
                               ),
@@ -139,7 +136,6 @@ class _boardNewState extends State<boardNew> {
                         ),
                       ),
                     ),
-
                     Container(width: 1000, height: 2, decoration: BoxDecoration(color: Colors.black54),),
                     SingleChildScrollView(
                         child: Flexible(
@@ -156,7 +152,6 @@ class _boardNewState extends State<boardNew> {
                                 controller: _controller2,
                                 decoration: InputDecoration(
                                     labelText: '내용 입력하세요',
-                                    hintText: '???',  //글자를 입력하면 사라진다.
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.all(3)
                                 ),
