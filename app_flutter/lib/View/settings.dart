@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:you_my_colleague/View/StartPage.dart';
 
-import '../Kakao/kakao_login.dart';
+import '../Kakao/kakao.dart';
+import '../Kakao/kakao_model.dart';
 import '../Kakao/main_model.dart';
 
 class SettingPage extends StatefulWidget {
@@ -12,7 +13,6 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  final viewModel = MainModel(KakaoLogin());
 
   @override
   Widget build(BuildContext context) {
@@ -102,18 +102,18 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                           SizedBox(width:30),
                           InkWell(
-                              child: viewModel.isLogined ? Text('로그아웃', style: TextStyle(fontSize: 20, color: Colors.black),): Text('로그인', style: TextStyle(fontSize: 20, color: Colors.black),),
+                              child: KakaoData.Token ? Text('로그아웃', style: TextStyle(fontSize: 20, color: Colors.black),): Text('로그인', style: TextStyle(fontSize: 20, color: Colors.black),),
                               onTap: () async{
-                                if(viewModel.isLogined)
+                                if(KakaoData.Token)
                                   {
-                                    await viewModel.logout();
+                                    KakaoData.Token=false;
                                     setState(() {
                                       Navigator.of(context).pop();
                                     });
                                   }
                                 else
                                   {
-                                    await viewModel.login();
+                                    KakaoLogin();
                                     setState(() {
 
                                     });
@@ -122,7 +122,6 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                         ],
                       ),
-                      Text("${viewModel.isLogined}")
                     ],
                   )
                 ),

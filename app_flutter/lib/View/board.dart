@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Kakao/kakao_login.dart';
+import 'package:you_my_colleague/Kakao/kakao_model.dart';
+import '../Kakao/kakao.dart';
 import '../Kakao/main_model.dart';
 import 'board_1.dart';
 import 'm_board.dart';
 
 enum MENU {_new,sendMessage,call,shareUrl,delete }
 class Board extends StatefulWidget {
-  Board({this.parseTitle, this.parseDate,this.parseBoard,this.parseDescription, this.parseId});//재민 날짜별 날씨데이터 가져오기
+  Board({this.parseTitle, this.parseDate,this.parseBoard,this.parseDescription, this.parseId});
   final dynamic parseTitle;
   final dynamic parseBoard;
   final dynamic parseDate;
@@ -22,7 +23,7 @@ class Board extends StatefulWidget {
 
 class _BoardState extends State<Board> {
 
-  final viewModel = MainModel(KakaoLogin());
+  final viewModel = KakaoLogin();
   String title ='';
   String board ='';
   String date ='';
@@ -123,6 +124,14 @@ class _BoardState extends State<Board> {
                                               context, MaterialPageRoute(builder: (context) => const board1())
                                           );
                                         });
+
+                                        FirebaseFirestore.instance.collection("/post/ZQGCDA86AjRHWF7dvJAO/게시판").doc(id).delete();
+                                        setState(() {
+                                          Navigator.of(context).pop();
+                                          Navigator.push(
+                                              context, MaterialPageRoute(builder: (context) => const board1())
+                                          );
+                                        });
                                       }
                                     });
                                   },
@@ -148,6 +157,7 @@ class _BoardState extends State<Board> {
                                       child: Text
                                         ('URL 공유'),
                                     ),
+
                                     const PopupMenuItem<MENU>(
                                       value: MENU.delete,
                                       child: Text
@@ -258,8 +268,19 @@ class _CommentViewState extends State<CommentView> {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.check_box_outlined,
+              InkWell(
+                onTap: ()
+                {
+                  setState(() {
+                    if(KakaoData.showName == false)
+                      KakaoData.showName = true;
+                    else
+                      KakaoData.showName = false;
+                  });
+                },
+                child: Icon(
+                  KakaoData.showName? Icons.check_box_outlined : Icons.check_box,color: Colors.red,
+                ),
               ),
               Text('익명', style: TextStyle(color: Colors.red),),
             ],
@@ -294,7 +315,7 @@ class _CommentViewState extends State<CommentView> {
             ),
             onPressed: () {
               FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
-                  .add({'c_name': '${'익명' + num.toString()}', 'c_date': '${inputDate}',
+                  .add({'c_name': KakaoData.showName? '${KakaoData.user_name}':'${'익명' + num.toString()}', 'c_date': '${inputDate}',
                 'c_content': '${inputContent}',  'timestamp': FieldValue.serverTimestamp()});
               num++;
               setState(() {

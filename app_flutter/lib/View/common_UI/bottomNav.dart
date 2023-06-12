@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:you_my_colleague/Kakao/kakao_model.dart';
 import 'package:you_my_colleague/View/alarm.dart';
 import 'package:you_my_colleague/View/board_main.dart';
 import 'package:you_my_colleague/View/homepage.dart';
@@ -12,9 +11,6 @@ import '../board_1.dart';
 
 //신근재
 class bottomNav extends StatefulWidget {
-  const bottomNav({Key? key}) : super(key: key);
-  // bottomNav({this.parseLoginData});
-  // final dynamic parseLoginData;
   @override
   State<bottomNav> createState() => _bottomNavState();
 }
@@ -34,7 +30,6 @@ class _bottomNavState extends State<bottomNav> {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

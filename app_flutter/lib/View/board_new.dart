@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:you_my_colleague/Kakao/kakao_model.dart';
 
 class boardNew extends StatefulWidget {
   const boardNew({Key? key}) : super(key: key);
@@ -69,11 +70,12 @@ class _boardNewState extends State<boardNew> {
                               onTap: () {
                                 FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
                                     .add({'title': '${inputTitle}', 'date': '${inputDate}',
+                                  'userName' : '${KakaoData.user_name}', 'userData': '${KakaoData.user_id}', 'boardId': '${KakaoData.user_id}',
                                   'description': '${inputContent}', 'board':'${inputBoard}', 'timestamp': FieldValue.serverTimestamp()});
                                 String id = FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').id;
                                 setState(() {
                                   FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
-                                      .add({'c_name': '', 'c_date': '',
+                                      .add({'c_name': '','c_userData':'', 'c_date': '',
                                     'c_content': '',  'timestamp':''});
                                   Navigator.pop(context);
                                 });
@@ -90,27 +92,48 @@ class _boardNewState extends State<boardNew> {
                     ),
                     SizedBox(height: 20,),
                     Container(width: 1000, height: 2, decoration: BoxDecoration(color: Colors.black54),),
-                    Container(
+
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: ()
+                          {
+                            setState(() {
+                              if(KakaoData.showName == false)
+                                KakaoData.showName = true;
+                              else
+                                KakaoData.showName = false;
+                            });
+                          },
+                          child: Icon(
+                            KakaoData.showName? Icons.check_box_outlined : Icons.check_box,color: Colors.red,
+                          ),
+                        ),
+                        Text('익명', style: TextStyle(color: Colors.red),),
+                        SizedBox(width: 70,),
+                        Container(
                           child: Center(
                             child: DropdownButton(
                               value: _selectValue,
                               items: _valueList.map(
-                                (value) {
+                                    (value) {
                                   return DropdownMenuItem(
                                     value: value,
                                     child: Text(value),
 
-                                    );
-                                  },
-                                ).toList(),
-                                onChanged: (value){
+                                  );
+                                },
+                              ).toList(),
+                              onChanged: (value){
                                 setState(() {
                                   _selectValue = value!;
                                   inputBoard = value!;
                                 });
                               },
+                            ),
                           ),
                         ),
+                      ],
                     ),
                     SizedBox(height: 20,),
                     SingleChildScrollView(
