@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:you_my_colleague/Kakao/social_login.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:you_my_colleague/View/common_UI/bottomNav.dart';
 import 'kakao_model.dart';
@@ -23,7 +21,9 @@ void KakaoToken(){
       KakaoData.user_gen = (user.kakaoAccount?.gender).toString();
       KakaoData.user_name = (user.kakaoAccount?.profile?.nickname).toString();
       KakaoData.user_email = (user.kakaoAccount?.email).toString();
-      KakaoData.user_id = Random().nextInt(1000);
+      if(KakaoData.user_id == null)
+        KakaoData.user_id = Random().nextInt(1000);
+      print(KakaoData.user_id);
 
       await Future.delayed(Duration(seconds: 1));//땡겨오는 시간 딜레이 대기
       return true;

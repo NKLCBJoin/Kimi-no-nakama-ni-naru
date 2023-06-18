@@ -1,6 +1,8 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:you_my_colleague/Kakao/kakao_model.dart';
@@ -68,17 +70,49 @@ class _boardNewState extends State<boardNew> {
                             flex: 1,
                             child: InkWell(
                               onTap: () {
-                                FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
-                                    .add({'title': '${inputTitle}', 'date': '${inputDate}',
-                                  'userName' : '${KakaoData.user_name}', 'userData': '${KakaoData.user_id}', 'boardId': '${KakaoData.user_id}',
-                                  'description': '${inputContent}', 'board':'${inputBoard}', 'timestamp': FieldValue.serverTimestamp()});
-                                String id = FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').id;
-                                setState(() {
-                                  FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
-                                      .add({'c_name': '','c_userData':'', 'c_date': '',
-                                    'c_content': '',  'timestamp':''});
-                                  Navigator.pop(context);
-                                });
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: true, //바깥 영역 터치시 닫을지 여부 결정
+                                  builder: ((context) {
+                                    return AlertDialog(
+                                      title: Text("게시판을 등록 하시겠습니까?"),
+                                      actions: <Widget>[
+                                        Container(
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
+                                                  .add({'title': '${inputTitle}', 'date': '${inputDate}',
+                                                'userName' : '${KakaoData.user_name}', 'userData': '${KakaoData.user_id}', 'boardId': UserData.u_index,
+                                                'description': '${inputContent}', 'board':'${inputBoard}', 'timestamp': FieldValue.serverTimestamp()});
+                                              String id = FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').id;
+                                              setState(() {
+                                                FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
+                                                    .add({'c_name': '','c_userData':'', 'c_date': '',
+                                                  'c_content': '','c_image':'',  'timestamp':''});
+                                                UserData.user_num.add(0);
+                                                UserData.u_index++;
+                                                print(UserData.u_index);
+                                                Navigator.of(context).pop(); //창 닫기
+                                                Navigator.pop(context);
+
+                                              });
+                                            },
+                                            child: Text("네"),
+                                          ),
+                                        ),
+                                        Container(
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop(); //창 닫기
+                                            },
+                                            child: Text("아니요"),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }),
+                                );
+
                               },
 
                               child: Icon(
@@ -203,3 +237,4 @@ class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size(0.0, 0.0);
 }
+

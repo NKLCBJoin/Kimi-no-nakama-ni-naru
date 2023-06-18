@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:you_my_colleague/View/board_new.dart';
 
+import '../Kakao/kakao_model.dart';
 import 'board.dart';
 
 class board1 extends StatefulWidget {
@@ -115,6 +116,7 @@ class _ListViewPageState extends State<ListViewPage> {
               String description = docs[index]['description'];
               String board = docs[index]['board'];
               String id = docs[index].id;
+              String userId = docs[index]['userData'];
 
               return Container(
                 child: Flexible(
@@ -123,7 +125,7 @@ class _ListViewPageState extends State<ListViewPage> {
                       Navigator.push(
                           context, MaterialPageRoute(builder: (context){
                             return Board(parseTitle : title, parseBoard : board,
-                                parseDate : date, parseDescription : description, parseId: id);
+                                parseDate : date, parseDescription : description, parseId: id, parseUserId : userId);
                       })
                       );
                     },
