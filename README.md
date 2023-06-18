@@ -4,6 +4,7 @@
 ##  너 내 동료가 되어라!
 ### 君の仲間になる (Kimi no nakama ni naru)
 
+![image](https://github.com/jife98/ReadyForWhat/assets/114370871/639e3171-b095-4c48-9d7d-6f16642169ca)
 
 ## 🤖 왜 너.내.동을 이용해야 하는가?
 기존 커뮤니티 금오사이, 에브리타임에서 공모전/홍보 게시판에서 종종 팀원 혹은 스터디 그룹을 구하는 글들이 올라오지만,상세 설명 및 개인의 스펙을 등재 할만한 장의 부재로 인해, 팀원들을 구하기 어려웠다. 이러한 문제점을 해결 하기 위해, 공모전 및 학술에 목적을 둔 커뮤니티를 개발 하기로 결정 하였고, 여러 분야들을 세분화 및 카테고리화 하여 사용자 입장에서 쉽게 구분 할 수 있게하고, 사용자의 기술 스택 및 여러 스펙들을 프로필에 등재할 수 있게하여, 익명은 보장하되, 프로필을 통해 사용자의 정보를 참고 할 수 있게 한다.
@@ -50,14 +51,6 @@ flutter로 작업 하였지만, IOS,AOS 둘다 호환하기위해 각각의 네�
 
 ## 📦 Packages
 
-### 주요 OPEN API
-
-| Name | Description |
-| --- | --- |
-| [NAVER  MAP ](https://github.com/nhn/tui.editor/tree/master/apps/editor) | 좌표 정보를 입력으로 하여 주소정보 입력받거나, 주소정보로 좌표를 가져옴|
-| [KaKaoTalk ](https://github.com/nhn/tui.editor/tree/master/apps/editor) | 정보를 읽고 사용자 성별에 맞게 옷차림을 추천해줄 수 있기 위해 카카오톡 로그인을 사용하였고, OOTD 내용 공유를 위하여 카카오톡 공유 기능을 사용|
-| [Current weather data](https://openweathermap.org/current) |현재 날씨 정보를 가져오는 API|
-[GoogleSheets](https://developers.google.com/sheets/api) |구글스프레드 시트API로 DB구성|
 
 ### 주요 UI OPENSOURCE
 
