@@ -73,7 +73,6 @@ flutter로 작업 하였지만, IOS,AOS 둘다 호환하기위해 각각의 네�
 | --- | --- |
 | `get` |  상태변환에 여러군데 사용 |
 | `firebase_messaging` |  알람,알림에 사용 |
-| `geolocator` |  현재 위치 사용 |
 | `kakao_flutter_sdk_user` |  로그인 및 공유기능 위해 사용 |
 | `gsheets` |  DB생성위해 사용 |
 
