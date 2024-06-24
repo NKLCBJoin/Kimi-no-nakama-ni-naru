@@ -47,11 +47,11 @@ class KakaoLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-
         child: Image.asset('images/kakao_login_medium_narrow.png',width: 200,height: 50, fit: BoxFit.cover,),
         onTap: () async {
           //[1] 카카오톡 설치 여부
           if(await isKakaoTalkInstalled()){
+            print('카카오톡 설치 완료됨');
             try {
               //[2] 이미 로그인 했나 토큰 유효성 확인 후 로그인 시도
               AccessTokenInfo tokenInfo = await UserApi.instance.accessTokenInfo();
