@@ -45,7 +45,7 @@ class _board1State extends State<board1> {
                         ),
                         Flexible(
                             flex: 1,
-                            child: Text('통합 게시판', style: TextStyle(fontSize: 25, color: Colors.black),)
+                            child: Text('통합 게시판', style: TextStyle(fontSize: 20, color: Colors.black),)
                         ),
                         Flexible(
                             flex: 1,

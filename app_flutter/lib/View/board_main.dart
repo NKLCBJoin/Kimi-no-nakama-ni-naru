@@ -10,7 +10,7 @@ import 'package:you_my_colleague/View/board_my_write.dart';
 import 'package:you_my_colleague/View/board_request_newboard.dart';
 import 'package:you_my_colleague/View/settings.dart';
 import 'package:you_my_colleague/View/homepage.dart';
-
+// 메인 화면 홈화면
 class Board_main extends StatefulWidget {
   @override
   State<Board_main> createState() => _Board_mainState();

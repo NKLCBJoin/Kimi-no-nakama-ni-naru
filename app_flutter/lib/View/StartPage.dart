@@ -4,7 +4,7 @@ import 'package:you_my_colleague/View/common_UI/bottomNav.dart';
 import '../Kakao/kakao.dart';
 import '../Kakao/main_model.dart';
 
-
+//시작화면 어플리케이션 실행시 나오는 로그인 (카카오, 네이버, 구글)화면
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -49,7 +49,9 @@ class _StartPageState extends State<StartPage> {
                               height: 50,
                               fit: BoxFit.cover,),
                             onTap: () {
-
+                              Navigator.push
+                                (context,
+                                  MaterialPageRoute(builder: (context) => bottomNav()));
                             }
                         ),
                       ],

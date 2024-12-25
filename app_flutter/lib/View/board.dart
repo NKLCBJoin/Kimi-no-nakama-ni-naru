@@ -7,6 +7,7 @@ import '../Kakao/kakao.dart';
 import '../Kakao/main_model.dart';
 import 'board_1.dart';
 import 'm_board.dart';
+import 'package:extended_image/extended_image.dart';
 
 enum MENU {_new,sendMessage,call,shareUrl,delete }
 class Board extends StatefulWidget {
@@ -230,10 +231,23 @@ class _BoardState extends State<Board> {
                     children: [
                       Row(
                         children: [
-                          SizedBox(width: 5,),
+                          SizedBox(width: 5,height: 5,),
                           // Image.network(viewModel.user?.kakaoAccount?.profile?.profileImageUrl ?? ''),
-                          KakaoData.showName? Image.network(KakaoData.userImage_URL,width: 50,height: 50,)
-                              : Image.asset('images/익명.jpg',width: 50,height: 50, ),
+                          KakaoData.showName? ExtendedImage.network(
+                            '${KakaoData.userImage_URL}',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.fill,
+                            cache: true,
+                            border: Border.all(color: Colors.black, width: 1.0),
+                            shape: BoxShape.circle,
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ) : Image.asset('images/익명.jpg',width: 50,height: 50, ),
+                          // ClipRRect(
+                          //   borderRadius: BorderRadius.circular(100.0),
+                          //   child: KakaoData.showName? Image.network(KakaoData.userImage_URL,width: 50,height: 50,)
+                          //       : Image.asset('images/익명.jpg',width: 50,height: 50, ),
+                          // ),
                           Column(
                             children: [
                               Row(
@@ -243,6 +257,7 @@ class _BoardState extends State<Board> {
                                 ],
                               ),
                               Text(date),
+                              SizedBox(height: 5,)
                             ]
                           )
                         ],
@@ -344,44 +359,45 @@ class _CommentViewState extends State<CommentView> {
           SizedBox(width: 10,),
           Container(
             color: Colors.white,
-            width: 280,
+            width: 230,
             child: SingleChildScrollView(
-              child: Flexible(
-                child: TextField(
-                  onChanged: (text) {
-                    setState(() {
-                        inputContent = text;
-                    });
-                  },
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  controller: _CommentController,
-                  decoration: InputDecoration(
-                      labelText: '댓글을 입력하세요',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(3)
-                  ),
+              child: TextField(
+                onChanged: (text) {
+                  setState(() {
+                      inputContent = text;
+                  });
+                },
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: _CommentController,
+                decoration: InputDecoration(
+                    labelText: '댓글을 입력하세요',
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(3)
                 ),
               ),
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 14),
+          Flexible(
+            fit: FlexFit.tight,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 14),
+              ),
+              onPressed: () {
+                FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
+                    .add({'c_name': KakaoData.showName? '${KakaoData.user_name}':'${'익명' + UserData.user_num[UserData.u_index].toString()}', 'c_date': '${inputDate}',
+                  'c_content': '${inputContent}','c_image' : KakaoData.showName?  KakaoData.userImage_URL :'images/익명.jpg'  , 'timestamp': FieldValue.serverTimestamp()});
+                setState(() {
+                  _CommentController.clear();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  CommentView();
+                  UserData.user_num[UserData.u_index]++;
+                  print('USERDATA[U_index]: ${UserData.user_num[UserData.u_index]}');
+                });
+              },
+              child: Text('확인'),
             ),
-            onPressed: () {
-              FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
-                  .add({'c_name': KakaoData.showName? '${KakaoData.user_name}':'${'익명' + UserData.user_num[UserData.u_index].toString()}', 'c_date': '${inputDate}',
-                'c_content': '${inputContent}','c_image' : KakaoData.showName?  KakaoData.userImage_URL :'images/익명.jpg'  , 'timestamp': FieldValue.serverTimestamp()});
-              setState(() {
-                _CommentController.clear();
-                FocusManager.instance.primaryFocus?.unfocus();
-                CommentView();
-                UserData.user_num[UserData.u_index]++;
-                print('USERDATA[U_index]: ${UserData.user_num[UserData.u_index]}');
-              });
-            },
-            child: Text('확인'),
           ),
         ],
       ),

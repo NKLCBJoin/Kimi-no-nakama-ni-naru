@@ -35,6 +35,7 @@ class _boardNewState extends State<boardNew> {
   }
   @override
   Widget build(BuildContext context) {
+    var text1 = " ";
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -70,48 +71,52 @@ class _boardNewState extends State<boardNew> {
                             flex: 1,
                             child: InkWell(
                               onTap: () {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: true, //바깥 영역 터치시 닫을지 여부 결정
-                                  builder: ((context) {
-                                    return AlertDialog(
-                                      title: Text("게시판을 등록 하시겠습니까?"),
-                                      actions: <Widget>[
-                                        Container(
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
-                                                  .add({'title': '${inputTitle}', 'date': '${inputDate}',
-                                                'userName' : '${KakaoData.user_name}', 'userData': '${KakaoData.user_id}', 'boardId': UserData.u_index,
-                                                'description': '${inputContent}', 'board':'${inputBoard}', 'timestamp': FieldValue.serverTimestamp()});
-                                              String id = FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').id;
-                                              setState(() {
-                                                FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
-                                                    .add({'c_name': '','c_userData':'', 'c_date': '',
-                                                  'c_content': '','c_image':'',  'timestamp':''});
-                                                UserData.user_num.add(0);
-                                                UserData.u_index++;
-                                                print(UserData.u_index);
+                                if (inputTitle == "" || inputContent=="" || inputBoard == ""){
+                                  text1 = "데이터 없음";
+                                }
+                                else
+                                  text1 = "게시글을 등록 하시겠습니까?";
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: true, //바깥 영역 터치시 닫을지 여부 결정
+                                    builder: ((context) {
+                                      return AlertDialog(
+                                        title: Text(text1),
+                                        actions: <Widget>[
+                                          Container(
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판')
+                                                    .add({'title': '${inputTitle}', 'date': '${inputDate}',
+                                                  'userName' : '${KakaoData.user_name}', 'userData': '${KakaoData.user_id}', 'boardId': UserData.u_index,
+                                                  'description': '${inputContent}', 'board':'${inputBoard}', 'timestamp': FieldValue.serverTimestamp()});
+                                                String id = FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판').id;
+                                                setState(() {
+                                                  FirebaseFirestore.instance.collection('/post/ZQGCDA86AjRHWF7dvJAO/게시판/$id/댓글')
+                                                      .add({'c_name': '','c_userData':'', 'c_date': '',
+                                                    'c_content': '','c_image':'',  'timestamp':''});
+                                                  UserData.user_num.add(0);
+                                                  UserData.u_index++;
+                                                  print(UserData.u_index);
+                                                  Navigator.of(context).pop(); //창 닫기
+                                                  Navigator.pop(context);
+                                                });
+                                              },
+                                              child: Text("네"),
+                                            ),
+                                          ),
+                                          Container(
+                                            child: ElevatedButton(
+                                              onPressed: () {
                                                 Navigator.of(context).pop(); //창 닫기
-                                                Navigator.pop(context);
-
-                                              });
-                                            },
-                                            child: Text("네"),
+                                              },
+                                              child: Text("아니요"),
+                                            ),
                                           ),
-                                        ),
-                                        Container(
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop(); //창 닫기
-                                            },
-                                            child: Text("아니요"),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                );
+                                        ],
+                                      );
+                                    }),
+                                  );
 
                               },
 
